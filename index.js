@@ -14,7 +14,6 @@ form.addEventListener('click', (e) => {
   const searchTerm = searchInput.value;
   if (searchTerm) {
     getMovies(searchTerm);
-    searchInput.value = '';
   }
 });
 
