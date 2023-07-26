@@ -3,10 +3,8 @@
 import './style.css';
 // HTML elements
 const searchInput = document.getElementById('search');
-const searchButton = document.getElementById('searchBtn');
 const movieList = document.getElementById('movieList');
 const form = document.querySelector('.form');
-const banner = document.getElementById('banner');
 
 // Event listener for search button
 form.addEventListener('click', (e) => {
@@ -27,7 +25,6 @@ function getMovies(searchTerm) {
     .then((data) => {
       // Process the movie data and display it on the page
       displayMovies(data.results);
-      displayRandomBanner(data.results); // Display a random movie as the banner
     })
     .catch((error) => {
       console.log('Error:', error);
@@ -60,20 +57,5 @@ function displayMovies(movies) {
   }
 }
 
-// Function to display a random movie as the banner
-function displayRandomBanner(movies) {
-  const randomIndex = Math.floor(Math.random() * movies.length);
-  const randomMovie = movies[randomIndex];
-  const bannerHTML = `
-    <div id="banner-item">
-      <img src="https://image.tmdb.org/t/p/w500/${randomMovie.poster_path}" alt="${randomMovie.title} Poster">
-      <h2>${randomMovie.title}</h2>
-      <p>Rating: ${randomMovie.vote_average}</p>
-      <p>Release Date: ${randomMovie.release_date}</p>
-    </div>
-  `;
-  banner.innerHTML = bannerHTML;
-}
-
-// Initial load - Get popular movies and display a random movie as the banner
+// Initial load - Get popular movies
 getMovies('popular');
