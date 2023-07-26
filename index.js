@@ -5,13 +5,20 @@ import './style.css';
 const searchInput = document.getElementById('search');
 const movieList = document.getElementById('movieList');
 const form = document.querySelector('.form');
+const results_for = document.getElementById('results-for');
 
 // Event listener for search button
-form.addEventListener('click', (e) => {
+form.addEventListener('submit', (e) => {
   e.preventDefault();
+});
+
+searchInput.addEventListener('input', () => {
   const searchTerm = searchInput.value;
+  results_for.textContent = `Results for: ${searchTerm}`;
   if (searchTerm) {
-    getMovies(searchTerm);
+    setTimeout(() => {
+      getMovies(searchTerm);
+    }, 500);
   }
 });
 
@@ -45,8 +52,6 @@ function displayMovies(movies) {
         <div id="movie-item">
           <h2>${movie.title}</h2>
           <img src="https://image.tmdb.org/t/p/w500/${movie.poster_path}" alt="${movie.title} Poster" loading="lazy">
-          <p>Rating: ${movie.vote_average}</p>
-          <p>Release Date: ${releaseDate}</p>
         </div>
       `;
     });
